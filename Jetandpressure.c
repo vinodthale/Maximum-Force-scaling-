@@ -44,46 +44,6 @@ event init (t = 0)
     FILE *ip = fopen (name, "w");
     output_facets (f, ip);        // ################################################ tracer 
     fclose (ip);
-    static int nfb = 0;
-      sprintf (name, "%s/PmaxminFVDb0.00delta0.00V0.10.txt", VOFFOLDER);
-    if (!nfb)
-      SeVAt = fopen(name, "w");
-    else
-    SeVAt = fopen(name, "a");
-    //double XYD_Max[4];
-    double XYD_Max[4];
-    XYD_Max[0]= -1.0e20;
-    XYD_Max[1]= 0.00;
-    XYD_Max[2]= 0.00;
-    XYD_Max[3]= 0.00;
-    foreach_boundary(left)
-    {
-      if (XYD_Max[0] < pressure[])
-      {
-          XYD_Max[0] = pressure[];
-          XYD_Max[1] = x;
-          XYD_Max[2] = y;
-          XYD_Max[3] = Delta;
-      }               
-    }
-    fprintf (SeVAt, "%f %.10f %.10f %.10f %.10f\r\n", timeload, XYD_Max[0], XYD_Max[1], XYD_Max[2], XYD_Max[3]);
-    fclose (SeVAt);
-    nfb++;
-    static int nfe = 0;
-      sprintf (name, "%s/StressFVDb0.00delta0.00V0.10.txt", VOFFOLDER);
-    if (!nfe)
-      StresPre = fopen(name, "w");
-    else
-    StresPre = fopen(name, "a"); 
-   foreach_boundary(left)
-    {                                                
-    p[]=pressure[]*f[];                                            
-    }
-   PressureDropMaxima=statsf(p).max;
-   //ViscStressDropMaxima=statsf(viscstressdrop).max;
-   fprintf (StresPre, "%f  %.10f \r\n", timeload, PressureDropMaxima);
-   fclose (StresPre);
-   nfe++;
    //calculate the force on the substrate
     double pleft = 0.;
     double pForce  = 0.;
