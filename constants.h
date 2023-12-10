@@ -64,7 +64,7 @@
 #endif
 
 #define INITAL_GRID_LEVEL		9
-#define MAX_GRID_LEVEL			11
+#define MAX_GRID_LEVEL			12
 #define DOMAIN_WIDTH			4.00
 #define POOL_DEPTH		        0.00
 #define INITIAL_DISTANCE		0.04
