@@ -6,7 +6,7 @@ clock_t simulation_str_time, simulation_end_time;
 struct CFDValues cfdbv;
 // Boundary conditions
  u.t[left] = dirichlet(0);  // No slip at surface
- f[left] = 0.;    // non wetting 
+ f[left] = 0.;               // non wetting 
  u.n[right] = neumann(0);   // Free flow condition
  p[right] = dirichlet(0);   // 0 pressure far from surface
  u.n[top] = neumann(0);     // Allows outflow through boundary
@@ -14,39 +14,39 @@ struct CFDValues cfdbv;
 // Default for bottom is symmetry
 int main(int argc, char **argv)
 {
-	simulation_str_time = clock();
-	simulation_time_1file = 0.0;
-	writefile_time_1file = 0.0;
-	drop_time_1file = 0.0;
-	bubble_time_1file = 0.0;
-	numericalmainvalues(argv, argc, &cfdbv);
-	;
-	size(cfdbv.domainsize);
+simulation_str_time = clock();
+simulation_time_1file = 0.0;
+writefile_time_1file = 0.0;
+drop_time_1file = 0.0;
+bubble_time_1file = 0.0;
+numericalmainvalues(argv, argc, &cfdbv);
+;
+size(cfdbv.domainsize);
 #if AXI
-	;
+;
 #else
 	origin(0, -cfdbv.domainsize / 2., -cfdbv.domainsize / 2.);
 #endif
-	int initialgrid = pow(2, LEVELmin);
-	init_grid(initialgrid);
-	;
-	char comm[80];
+int initialgrid = pow(2, LEVELmin);
+init_grid(initialgrid);
+;
+char comm[80];
   sprintf (comm, "mkdir -p intermediate");
   system(comm);
-	rho1 = cfdbv.rhoL;
-	rho2 = cfdbv.rhoG;
-	mu1 = cfdbv.muL;
-	mu2 = cfdbv.muG;
-	f.sigma = cfdbv.Sigma;
-	G.x -= 1.0/sq(cfdbv.Froude);  
-  Z.x = 0.0;
-  /* Poisson solver constants */
-  //DT = 1.0e-4;          // Minimum timestep
-  //NITERMIN = 1;         // Min number of iterations (default 1)
-  //NITERMAX = 100;       // Max number of iterations (default 100)
-  TOLERANCE = 1e-6;       // Possion solver tolerance (default 1e-3)
-  run();
-	return 1;               
+rho1 = cfdbv.rhoL;
+rho2 = cfdbv.rhoG;
+mu1 = cfdbv.muL;
+mu2 = cfdbv.muG;
+f.sigma = cfdbv.Sigma;
+G.x -= 1.0/sq(cfdbv.Froude);  
+Z.x = 0.0;
+/* Poisson solver constants */
+//DT = 1.0e-4;          // Minimum timestep
+//NITERMIN = 1;         // Min number of iterations (default 1)
+//NITERMAX = 100;       // Max number of iterations (default 100)
+TOLERANCE = 1e-6;       // Possion solver tolerance (default 1e-3)
+run();
+return 1;               
 }
 
 event defaults(i = 0)
@@ -81,19 +81,13 @@ event init(i = 0)
 		//refine(sq(x - x0) + sq(y) + sq(z) < sq(0.50 * cfdbv.diameter + cfdbv.refinegap) &&  level < LEVELmax); // refinement along Dorp 
 		foreach ()
 		{
-      f[] = 0.0;
-		  if(sq(x - x0) + sq(y) + sq(z) < sq(0.50*cfdbv.diameter))  // this is for Drop 
-			{
-        f[] = 1.0;
-        u.x[] = -cfdbv.vel;
-        u.y[] = 0.0;
-			}
-      /*if(sq(x - Bubtx0) + sq(y) + sq(z) < sq(0.50*(cfdbv.bubblediameter * cfdbv.diameter))) // this for the Inside the bubble 
-			{
-				f[] = 0.0;  
-        u.x[] = -cfdbv.vel;
-        u.y[] = 0.0;
-			}*/
+                 f[] = 0.0;
+		if(sq(x - x0) + sq(y) + sq(z) < sq(0.50*cfdbv.diameter))  // this is for Drop 
+		 {
+                           f[] = 1.0;
+                           u.x[] = -cfdbv.vel;
+                           u.y[] = 0.0;
+		}
 		};
 		clock_t timestr, timeend;
 		timestr = clock();
@@ -205,7 +199,7 @@ event outputfiles (t += SAVE_FILE_EVERY)//remaining the beginning time
 	if (t == 0.0)
 		estimatetimeleft = 0.0;
 	else
-		estimatetimeleft = simulation_time_total * (cfdbv.timecontact + cfdbv.timeend) / t - simulation_time_total;
+	estimatetimeleft = simulation_time_total * (cfdbv.timecontact + cfdbv.timeend) / t - simulation_time_total;
 	timecalculation(simulation_time_1file, LDc);
 	timecalculation(simulation_time_total, TDc);
 	timecalculation(estimatetimeleft, ETLc);
