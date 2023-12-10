@@ -84,9 +84,9 @@ event init(i = 0)
                  f[] = 0.0;
 		if(sq(x - x0) + sq(y) + sq(z) < sq(0.50*cfdbv.diameter))  // this is for Drop 
 		 {
-                           f[] = 1.0;
-                           u.x[] = -cfdbv.vel;
-                           u.y[] = 0.0;
+                    f[] = 1.0;
+                    u.x[] = -cfdbv.vel;
+                    u.y[] = 0.0;
 		}
 		};
 		clock_t timestr, timeend;
