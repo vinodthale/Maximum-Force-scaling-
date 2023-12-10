@@ -6,7 +6,7 @@
 # set name of job
 #SBATCH --job-name=P1
 # set working dirrectory
-#SBATCH --chdir=/storage/Vat/Vinod/WaterVat/feb2023/ForceAirliquiddrop/Silicone500Cst/V0.10
+#SBATCH --chdir=V0.10
 #SBATCH --output=slurm.out
 #SBATCH --error=slurm.err
 
