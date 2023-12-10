@@ -12,54 +12,11 @@
 
 #if DIM_NONDIM_EXP == 'd' || DIM_NONDIM_EXP == 'D'
 
-/*The transient force profile of low-speed droplet impact: measurements and model doi:10.1017/jfm.2019.141 
-TABLE 1. Material properties of the liquids employed  Page 305 
-Impacting drop of diameter D = 2.050e-03
-Liquid                 Density ρ  (kg m−3)               Viscosity µ              Surface tension σ                           
-Glycerin                       1258                 1490.0    [1.49 Pa-s]             [0.063 N/m]  
-Glycerin (22.0 °C)             1256.6               1136.5    [1.1365 Pa-s]           [0.0632 N/m] 
-1000 cst Silicone oil          970                  970.0     [0.97 Pa-s]             [0.0217 N/m] 
-Glycerin (26.0 °C)             1254.8               872.3     [0.8723 Pa-s]           [0.06301 N/m]
-95 % Glycerin                  1248                 523       [0.523 Pa-s]            [0.063 N/m]  
-500 cst Silicone oil           970                  465.0     [0.465 Pa-s]            [0.01989 N/m]   
-90 % Glycerin                  1235                 219       [0.219 Pa-s]            [0.064 N/m]
-100 cst Silicone oil           960                  96.0      [0.096 Pa-s]            [0.0211 N/m]
-80 % Glycerin                  1208                 60        [0.06 Pa-s]             [0.065 N/m]  
-70 % Glycerin                  1181.3               22.5      [0.0225 Pa-s]           [0.0664 N/m] 
-60 % Glycerin                  1153.8               10.8      [0.0108 Pa-s]           [0.0676 N/m]  
-20 cst Silicone oil            950.0                20        [0.02 Pa-s ]            [0.0189 N/m] 
-50 % Glycerin                  1126                  6        [0.006 Pa-s]            [0.068 N/m]   
-Water                          998                  1.0       [0.001 Pa-s]            [0.073 N/m]
-Ethanol  
-
-Ji, B., Yang, Z. & Feng, J. Compound jetting from bubble bursting at an air-oil-water interface. Nat Commun 12, 6305 (2021). 
-https://doi.org/10.1038/s41467-021-26382-w
-
-liquids                     ρ (kg/m3)                  μ (mPa .s)                γwa (mN/m)          γoa (mN/m)           γow (mN/m) 
-  
-DI water                    998                          0.89                     71.6±1.0           N/A                 N/A
-
-5cSt silicone oil          913                          4.6                       N/A                18.7±0.3           38.1±0.4
-
-20cSt silicone oil         950                          19                        N/A                 19.4±0.7          40.9±0.5
-
-     
-100cSt silicone oil        960                          96                        N/A                 20.1±0.2          43.7±0.4
-
-            
-500cSt silicone oil        970                          465                       N/A                 19.9±0.1          38.7±0.2
-
-1000cSt silicone oil       970                          970                        N/A                21.7±0.2          40.8±1.0 
-*/
-
-
-
-
 #define VELOCITY			0.10                    // Velocity of 500 cst Silicone oil    m/s  Si unit  for         
-#define DROP_DIAMETER		2.050e-03               // Diameter of 500 cst Silicone oil   drop  meter Si unit 
-#define RHO_L				970.0                  // Density of 500cst Silicone oil   25 degree kg/m^3  Si unit 
+#define DROP_DIAMETER		        2.050e-03               // Diameter of 500 cst Silicone oil   drop  meter Si unit 
+#define RHO_L				970.0                   // Density of 500cst Silicone oil   25 degree kg/m^3  Si unit 
 #define RHO_G				1.21                    // Density of air at 25 degree degree kg/m^3  Si unit 
-#define MU_L				0.465                  // Dynamisc Viscosity of  500 cst Silicone oil   at 25 degree Pa s in Si unit 
+#define MU_L				0.465                   // Dynamisc Viscosity of  500 cst Silicone oil   at 25 degree Pa s in Si unit 
 #define MU_G				1.81e-5                 // Dynamic Viscosity of air at 25 degree
 #define SIGMA				0.01989                 // Surface tension of 500 cst Silicone oil  drop  at 25 degree   N/m  Si unit 
 #define GRAVITY				9.81  
@@ -68,18 +25,18 @@ DI water                    998                          0.89                   
 #define MU_GL				0.0
 #define REYNOLDS			0.0
 #define WEBER				0.0
-#define FROUDE              0.0
+#define FROUDE                          0.0
 
 #elif DIM_NONDIM_EXP == 'n' || DIM_NONDIM_EXP == 'N'
 
 #define WEBER				100.0
 #define REYNOLDS			100.0
-#define FROUDE              70.0
+#define FROUDE                          70.0
 #define RHO_GL				(0.0012) // air-water at 25C: 0.001187503
 #define MU_GL				(0.0210) // air-water at 25C: 0.020898876
 //
 #define VELOCITY			0.0
-#define DROP_DIAMETER		0.0
+#define DROP_DIAMETER		        0.0
 #define RHO_L				0.0
 #define MU_L				0.0
 #define SIGMA				0.0
@@ -91,8 +48,8 @@ DI water                    998                          0.89                   
 
 #define WEBER				300.0
 #define REYNOLDS			1000.0
-#define FROUDE              70.0
-#define DROP_DIAMETER		2.0e-3
+#define FROUDE                          70.0
+#define DROP_DIAMETER		        2.0e-3
 #define SIGMA				17.6e-3
 #define RHO_L				816.0
 #define RHO_G				1.2041
@@ -109,15 +66,15 @@ DI water                    998                          0.89                   
 #define INITAL_GRID_LEVEL		9
 #define MAX_GRID_LEVEL			11
 #define DOMAIN_WIDTH			4.00
-#define POOL_DEPTH				0.00
+#define POOL_DEPTH		        0.00
 #define INITIAL_DISTANCE		0.04
-#define BUBBLE_DIAMETER		    0.00      
-#define DBDELTA       		    0.00    
-#define REFINE_GAP				0.02
-#define MAX_TIME				1.00
+#define BUBBLE_DIAMETER		        0.00      
+#define DBDELTA       		        0.00    
+#define REFINE_GAP		        0.02
+#define MAX_TIME			1.00
 #define SAVE_FILE_EVERY			0.01 
 
-#define REFINE_VAR				{f, u.x, u.y} 
+#define REFINE_VAR			{f, u.x, u.y} 
 #define REFINE_VAR_TEXT			"f, u.x, u.y" 
 #define REFINE_VALUE_0			-6
 #define REFINE_VALUE_1			-3
@@ -128,7 +85,7 @@ DI water                    998                          0.89                   
 #define REMOVE_DROP_PERIOD		4
 #define REMOVE_BUBBLE_YESNO		'n'
 #define REMOVE_BUBBLE_SIZE		4.0 // equivalent diameter base on the maximum refinement
-#define REMOVE_BUBBLE_PERIOD	4
+#define REMOVE_BUBBLE_PERIOD	         4
 
 
 #define FILENAME_DATA			"data"
@@ -137,8 +94,8 @@ DI water                    998                          0.89                   
 #define FILENAME_ENDOFRUN		"endofrun"
 #define FILENAME_LASTFILE		"lastfile"
 
-#define R_VOFLIMIT				1.0e-9
-#define R_PI					3.1415926535897932384626433832795
+#define R_VOFLIMIT			1.0e-9
+#define R_PI			        3.1415926535897932384626433832795
 
 int LEVELmin = INITAL_GRID_LEVEL, LEVELmax = MAX_GRID_LEVEL ;
 double maxruntime = HUGE;
@@ -242,8 +199,8 @@ int numericalmainvalues(char **argv, int argc, struct CFDValues *bvalues)
 		printf("R: %f --- W: %f --- H: %f\r\n", bvalues->Reynolds, bvalues->Weber, bvalues->pooldepth);
 		FILE *fp;
 		fp = fopen (FILENAME_PARAMETERS, "w");
-	    fprintf (fp, "Name of Liquid : 500 cst Silicone oil   drop  \r\n");
-	    fprintf (fp, "Experimental parameters  / Numerical simulation parameters in Basilisk unit\r\n");
+	        fprintf (fp, "Name of Liquid : 500 cst Silicone oil   drop  \r\n");
+	        fprintf (fp, "Experimental parameters  / Numerical simulation parameters in Basilisk unit\r\n");
 		fprintf (fp, "Diameter_Experimental: %.3e / Normalized diameter  of drop (D): %.3e\r\n", DROP_DIAMETER, bvalues->diameter);
 		fprintf (fp, "Velocity_Experimental: %.3e / Normalized Velocity  of liquid (V) : %.3e\r\n", velocity, bvalues->vel);
 		fprintf (fp, "Rho(L)_Experimental: %.3e /  Normalized density of liquid (rho1): %.3e\r\n", RHO_L, bvalues->rhoL); 
